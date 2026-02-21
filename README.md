@@ -156,3 +156,8 @@ Frontend runs at: **http://localhost:3000**
 # Nextsjs initial setup
 npx create-next-app@latest frontend
 cd frontend
+
+
+# Nestjs initial setup
+npm i -g @nestjs/cli
+nest new project-name
