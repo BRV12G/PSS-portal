@@ -161,3 +161,12 @@ cd frontend
 # Nestjs initial setup
 npm i -g @nestjs/cli
 nest new project-name
+
+
+# Prisma Postgres Nest Conection
+npm install prisma --save-dev
+npm install @prisma/client   
+npx prisma init  
+create the db in pgadmin and update the db url
+npx prisma migrate dev --name init
+npx prisma generate
