@@ -18,6 +18,7 @@ model Admin {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  auditLogs AuditLog[]
 
   @@map("admins")
 }
@@ -68,3 +69,22 @@ model CarouselImage {
 
   @@map("carousel_images")
 }
+
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  adminId    Int
+  action     String   // CREATE, UPDATE, DELETE
+  entity     String   // e.g. "Event", "Announcement"
+  entityId   Int      // ID of the affected record
+  oldData    Json?    // data before change
+  newData    Json?    // data after change
+  createdAt  DateTime @default(now())
+
+  admin      Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+
+// polymorphic audit design for audit log that can handle multiple entities with a single table, we can use a JSON field to store the old and new data for any entity type. This way, we can log changes for any entity without needing separate audit tables for each entity type.
