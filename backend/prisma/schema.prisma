@@ -13,3 +13,58 @@ datasource db {
   provider = "postgresql"
 }
 
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  @@map("admins")
+}
+
+model CommitteeMember {
+  id          Int      @id @default(autoincrement())
+  name        String
+  designation String
+  photoUrl    String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("committee_members")
+}
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  photoUrl    String?
+  date        DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime
+  photoUrl    String?
+  location    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("events")
+}
+
+model CarouselImage {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  altText   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("carousel_images")
+}
